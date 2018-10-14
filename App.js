@@ -215,9 +215,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   title: {
-    fontSize: 30,
+    fontSize: 22,
+    color: "red",
     textAlign: 'center',
-    marginBottom: 50,
+    marginBottom: 40,
   },
   tile: {
     borderWidth: 5,
