@@ -10,3 +10,6 @@ React Native application - game of Tic Tac Toe with Pig characters
 
 # Run
 `$ react-native run-android`
+
+# Code
+Everything is in the App.js at the moment.
