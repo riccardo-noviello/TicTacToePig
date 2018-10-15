@@ -16,4 +16,4 @@ Everything is in the App.js at the moment.
 
 # Demo
 
-![](demo.gif | width=200)
+![](demo.gif | width=250)
