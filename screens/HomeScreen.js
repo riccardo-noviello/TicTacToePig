@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import Button from "../components/Button";
 
 export default class HomeScreen extends Component {
@@ -7,6 +7,14 @@ export default class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.gameTitle}>Play Tic Tac Toe Pigs!</Text>
+        <Image
+          style={{ width: 200, height: 200 }}
+          source={require("./../assets/logo.png")}
+        />
+        <Button
+          label="Choose Characters"
+          onPress={() => this.props.navigation.navigate("ChoosePlayer")}
+        />
         <Button
           label="Start Game"
           onPress={() =>

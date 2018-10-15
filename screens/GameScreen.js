@@ -5,12 +5,12 @@ import {
   Text,
   View,
   Alert,
-  TouchableHighlight
+  Image
 } from "react-native";
-import Image from "react-native-remote-svg";
+import Button from "../components/Button";
 
 const MAX_TILES = 3;
-const NO_MORE_MOVES_MESSAGE = "No more moves available. Game Over";
+const NO_MORE_MOVES_MESSAGE = "No more moves available";
 const initialState = {
   gameState: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
   currentPlayer: 1,
@@ -258,16 +258,7 @@ export default class GameScreen extends Component {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight
-            onPress={() => this.initialiseGame()}
-            underlayColor="white"
-          >
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Play again!</Text>
-            </View>
-          </TouchableHighlight>
-        </View>
+        <Button label="Play again!" onPress={() => this.initialiseGame()} />
       </View>
     );
   }
@@ -294,18 +285,5 @@ const styles = StyleSheet.create({
   image: {
     marginTop: 10,
     marginLeft: 10
-  },
-  buttonContainer: {
-    paddingTop: 10
-  },
-  button: {
-    marginBottom: 30,
-    width: 260,
-    alignItems: "center",
-    backgroundColor: "#2196F3"
-  },
-  buttonText: {
-    padding: 20,
-    color: "white"
   }
 });

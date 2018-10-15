@@ -3,6 +3,9 @@ import { StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button";
 
 export default class ChoosePlayerScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     const { navigation } = this.props;
     this.player1Name = navigation.getParam("player1Name");
@@ -13,10 +16,14 @@ export default class ChoosePlayerScreen extends Component {
     if (navigation.getParam("player2Icon")) {
       this.player1Icon = playersIcons[navigation.getParam("player2Icon")];
     }
-
+    if (!this.player1Name) {
+      this.state = { player: 1 };
+    } else {
+      this.state = { player: player1Name };
+    }
     return (
       <View style={styles.container}>
-        <Text style={styles.gameTitle}>Choose Player</Text>
+        <Text style={styles.gameTitle}>Choose Player {this.state.player}</Text>
         <Button
           label="Next"
           onPress={() =>

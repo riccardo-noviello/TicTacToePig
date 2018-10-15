@@ -24,7 +24,7 @@ export default class Button extends Component {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    paddingTop: 50
+    paddingTop: 10
   },
   button: {
     marginBottom: 30,
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     padding: 20,
-    color: "white"
+    color: "white",
+    fontSize: 20
   }
 });
