@@ -14,15 +14,16 @@ const NO_MORE_MOVES_MESSAGE = "No more moves available. Game Over";
 const initialState = {
   gameState: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
   currentPlayer: 1,
-  gameOver: false
+  gameOver: false,
+  currentPlayerName: ""
 };
 
 export default class GameScreen extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
-    this.player1Name = "Peppa Pig";
-    this.player2Name = "Pedro Pony";
+    this.player1Name = "";
+    this.player2Name = "";
     this.playersIcons = [
       (this.player1IconFn = require("./../assets/pig1.png")),
       (this.player1IconFn = require("./../assets/pig2.png")),
@@ -33,12 +34,17 @@ export default class GameScreen extends Component {
     this.player2Icon = this.playersIcons[3];
   }
 
+  componentDidMount() {
+    this.initialiseGame();
+  }
+
   initialiseGame() {
     if (this.state) {
       this.setState({
         gameState: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
         currentPlayer: 1,
-        gameOver: false
+        gameOver: false,
+        currentPlayerName: ""
       });
     }
   }
@@ -65,9 +71,7 @@ export default class GameScreen extends Component {
    * @param {*} player
    */
   getPlayerName(player) {
-    return player == 1
-      ? this.player1Name + " wins!"
-      : this.player2Name + " wins!";
+    return player == 1 ? this.player1Name : this.player2Name;
   }
 
   /**
@@ -97,32 +101,29 @@ export default class GameScreen extends Component {
    * @param {*} arr
    */
   isGameFinished(arr) {
-    let sumRows;
-    let sumCols;
-    let sumDiagonal1;
-    let sumDiagonal2;
+    let sum;
+    let result = false;
 
     // check rows
-    for (let i = 0; i < MAX_TILES; i++) {
-      sumRows = arr[i][0] + arr[i][1] + arr[i][2];
+    for (let i = 0; i < 3; i++) {
+      sum = arr[i][0] + arr[i][1] + arr[i][2];
+      result = result || this.strikesThree(sum);
     }
     // check columns
-    for (let i = 0; i < MAX_TILES; i++) {
-      sumCols = arr[0][i] + arr[1][i] + arr[2][i];
+    for (let i = 0; i < 3; i++) {
+      sum = arr[0][i] + arr[1][i] + arr[2][i];
+      result = result || this.strikesThree(sum);
     }
 
     // check diagonal 1
-    sumDiagonal1 = arr[0][0] + arr[1][1] + arr[2][2];
+    sum = arr[0][0] + arr[1][1] + arr[2][2];
+    result = result || this.strikesThree(sum);
 
     // check diagonal 2
-    sumDiagonal2 = arr[0][2] + arr[1][1] + arr[2][0];
+    sum = arr[0][2] + arr[1][1] + arr[2][0];
+    result = result || this.strikesThree(sum);
 
-    return (
-      this.strikesThree(sumRows) ||
-      this.strikesThree(sumCols) ||
-      this.strikesThree(sumDiagonal1) ||
-      this.strikesThree(sumDiagonal2)
-    );
+    return result;
   }
 
   /**
@@ -155,10 +156,12 @@ export default class GameScreen extends Component {
     // set next player
     let nextPlayer = this.getNextPlayer(currentPlayer);
     this.setState({ currentPlayer: nextPlayer });
+    let currentPlayerName = this.getPlayerName(nextPlayer);
+    this.setState({ currentPlayerName: currentPlayerName });
 
     // finish game
     if (this.isGameFinished(arr)) {
-      this.endGame(this.getPlayerName(currentPlayer));
+      this.endGame(this.getPlayerName(currentPlayer) + " wins!");
       return;
     } else if (this.noMoreMoves(arr)) {
       this.endGame(NO_MORE_MOVES_MESSAGE);
@@ -186,10 +189,11 @@ export default class GameScreen extends Component {
     if (navigation.getParam("player2Icon")) {
       this.player1Icon = playersIcons[navigation.getParam("player2Icon")];
     }
-
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Play Tic Tac Toe Pigs!</Text>
+        <Text style={styles.title}>
+          Your turn: {this.getPlayerName(this.state.currentPlayer)}
+        </Text>
 
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
@@ -277,10 +281,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white"
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     color: "red",
     textAlign: "center",
-    marginBottom: 40
+    marginBottom: 5
   },
   tile: {
     borderWidth: 5,
@@ -292,7 +296,7 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   buttonContainer: {
-    paddingTop: 50
+    paddingTop: 10
   },
   button: {
     marginBottom: 30,

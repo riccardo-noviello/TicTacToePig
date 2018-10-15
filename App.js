@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { createStackNavigator } from "react-navigation";
-import LoginScreen from "./screens/LoginScreen";
+import HomeScreen from "./screens/HomeScreen";
 import GameScreen from "./screens/GameScreen";
+import ChoosePlayerScreen from "./screens/ChoosePlayerScreen";
 
 const AppStackNavigator = createStackNavigator({
   Login: {
-    screen: LoginScreen
+    screen: HomeScreen
+  },
+  ChoosePlayer: {
+    screen: ChoosePlayerScreen
   },
   Game: {
     screen: GameScreen
