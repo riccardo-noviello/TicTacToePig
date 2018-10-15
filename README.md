@@ -1,6 +1,10 @@
 # TicTacToePig
 React Native application - game of Tic Tac Toe with Pig characters
 
+# Demo
+
+![](demo.gif)
+
 # Software Requirements to Compile
 - Install NodeJS
 - Install Android Studio
@@ -14,6 +18,3 @@ React Native application - game of Tic Tac Toe with Pig characters
 # Code
 Everything is in the App.js at the moment.
 
-# Demo
-
-![](demo.gif)
