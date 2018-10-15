@@ -13,3 +13,7 @@ React Native application - game of Tic Tac Toe with Pig characters
 
 # Code
 Everything is in the App.js at the moment.
+
+# Demo
+
+![](demo.gif)
