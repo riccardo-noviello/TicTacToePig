@@ -16,5 +16,6 @@ React Native application - game of Tic Tac Toe with Pig characters
 `$ react-native run-android`
 
 # Code
-Everything is in the App.js at the moment.
+Start snooping around from App.js. 
+P.S. adding Jest tests would be a nice addition for the next steps. I am aso open to suggestions
 
