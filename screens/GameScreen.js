@@ -184,10 +184,10 @@ export default class GameScreen extends Component {
     this.player1Name = navigation.getParam("player1Name");
     this.player2Name = navigation.getParam("player2Name");
     if (navigation.getParam("player1Icon")) {
-      this.player1Icon = playersIcons[navigation.getParam("player1Icon")];
+      this.player1Icon = this.playersIcons[navigation.getParam("player1Icon")];
     }
     if (navigation.getParam("player2Icon")) {
-      this.player1Icon = playersIcons[navigation.getParam("player2Icon")];
+      this.player2Icon = this.playersIcons[navigation.getParam("player2Icon")];
     }
     return (
       <View style={styles.container}>
